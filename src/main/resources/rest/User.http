@@ -1,0 +1,19 @@
+POST http://localhost:9001/user/signup
+Content-Type: application/json
+
+{
+  "email" : "brandjunhoe2@gmail.com",
+  "password" : "1234"
+}
+
+###
+
+POST http://localhost:9001/auth/signin
+Content-Type: application/json
+
+{
+  "email" : "brandjunhoe@gmail.com",
+  "password" : "1234"
+}
+
+###

@@ -2,6 +2,7 @@ package com.brandjunhoe.userservice.common.handler
 
 import com.brandjunhoe.userservice.common.code.ErrorException
 import com.brandjunhoe.userservice.common.code.ErrorCode
+import com.brandjunhoe.userservice.common.exception.BadRequestException
 import com.brandjunhoe.userservice.common.exception.DataNotFoundException
 import com.brandjunhoe.userservice.common.response.CommonResponse
 import org.apache.http.auth.AuthenticationException
@@ -25,36 +26,40 @@ import javax.servlet.http.HttpServletRequest
 @Order(Ordered.HIGHEST_PRECEDENCE)
 class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = [
-        // HTTP 요청 에러
-        HttpMessageNotReadableException::class,
-        // 지원되지 않는 HTTP METHOD 에러 핸들러
-        HttpRequestMethodNotSupportedException::class,
-        // 파일이 용량 제한 에러
-        MaxUploadSizeExceededException::class,
-        // Parameter Validation Error
-        BindException::class,
-        // Parameter Validation Error
-        MethodArgumentNotValidException::class,
-        // 인자값 형식 에러
-        IllegalArgumentException::class,
-        // Kotlin non-null 파라메터 예외 처리
-        BeanInstantiationException::class,
-        // JWT 토큰 인증정보 확인 예외 처리
-        AuthenticationException::class,
-        // 권한 에러
-        AccessDeniedException::class,
-        // FeignClient 통신 에러
-        javax.websocket.DecodeException::class,
-        // 잘못된 파라메터 타입
-        MethodArgumentTypeMismatchException::class,
-        // 입출력 예외 처리
-        IOException::class,
-        // 잘못된 요청
-        DataNotFoundException::class,
-        // 에러
-        Exception::class
-    ])
+    @ExceptionHandler(
+        value = [
+            // HTTP 요청 에러
+            HttpMessageNotReadableException::class,
+            // 지원되지 않는 HTTP METHOD 에러 핸들러
+            HttpRequestMethodNotSupportedException::class,
+            // 파일이 용량 제한 에러
+            MaxUploadSizeExceededException::class,
+            // Parameter Validation Error
+            BindException::class,
+            // Parameter Validation Error
+            MethodArgumentNotValidException::class,
+            // 인자값 형식 에러
+            IllegalArgumentException::class,
+            // Kotlin non-null 파라메터 예외 처리
+            BeanInstantiationException::class,
+            // JWT 토큰 인증정보 확인 예외 처리
+            AuthenticationException::class,
+            // 권한 에러
+            AccessDeniedException::class,
+            // FeignClient 통신 에러
+            javax.websocket.DecodeException::class,
+            // 잘못된 파라메터 타입
+            MethodArgumentTypeMismatchException::class,
+            // 입출력 예외 처리
+            IOException::class,
+            // 잘못된 요청
+            BadRequestException::class,
+            // 데이터 찾지 못할 경우
+            DataNotFoundException::class,
+            // 에러
+            Exception::class
+        ]
+    )
     @Throws(Exception::class)
     fun commonExcetpion(e: Exception, request: HttpServletRequest, webRequest: WebRequest): CommonResponse<Any> {
 
@@ -68,7 +73,7 @@ class GlobalExceptionHandler {
             ErrorException.HttpRequestMethodNotSupportedException.name,
             ErrorException.IllegalArgumentException.name,
             ErrorException.FormValidationException.name,
-                // 잘못된 요청
+            // 잘못된 요청
             ErrorException.BadRequestException.name -> ErrorCode.BAD_REQUEST
             // 인증 실패
             ErrorException.AuthenticationException.name -> ErrorCode.UNAUTHORIZED

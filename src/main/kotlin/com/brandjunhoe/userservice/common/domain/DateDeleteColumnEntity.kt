@@ -1,5 +1,6 @@
 package com.brandjunhoe.userservice.common.domain
 
+import java.time.LocalDate
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.MappedSuperclass
@@ -9,9 +10,15 @@ import javax.persistence.TemporalType
 @MappedSuperclass
 open class DateDeleteColumnEntity(
 
-        @Temporal(TemporalType.TIMESTAMP)
-        @Column(name = "deldate")
-        val deldate: Date? = null
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "deldate")
+    var deldate: Date? = null
 
-) : DateColumnEntity()
+) : DateColumnEntity() {
+
+    fun delete() {
+        this.deldate = Date()
+    }
+
+}
 
