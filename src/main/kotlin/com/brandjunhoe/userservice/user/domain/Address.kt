@@ -6,8 +6,8 @@ import javax.persistence.Embeddable
 @Embeddable
 class Address(
 
-    @Column(name = "zip_code", length = 6, nullable = false)
-    val zipCode: String,
+    @Column(name = "post_code", length = 6, nullable = false)
+    val postCode: String,
 
     @Column(name = "address", length = 255, nullable = false)
     val address: String,

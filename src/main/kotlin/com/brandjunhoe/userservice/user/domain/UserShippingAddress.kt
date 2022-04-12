@@ -1,13 +1,7 @@
 package com.brandjunhoe.userservice.user.domain
 
 import com.brandjunhoe.userservice.common.domain.DateDeleteColumnEntity
-import com.brandjunhoe.userservice.user.domain.nums.GenderEnum
-import com.brandjunhoe.userservice.user.domain.nums.GradeEnum
-import com.brandjunhoe.userservice.user.domain.nums.JoinTypeEnum
-import org.hibernate.annotations.ColumnDefault
-import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.GenericGenerator
-import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
 
@@ -21,8 +15,8 @@ class UserShippingAddress(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID(),
 
-    @Column(name = "name", length = 30, nullable = false)
-    val name: String,
+    @Column(name = "receiver", length = 30, nullable = false)
+    val receiver: String,
 
     @Column(name = "phone", length = 11)
     val phone: String? = null,
