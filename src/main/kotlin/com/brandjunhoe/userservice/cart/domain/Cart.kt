@@ -1,9 +1,6 @@
-package com.brandjunhoe.userservice.user.domain
+package com.brandjunhoe.userservice.cart.domain
 
 import com.brandjunhoe.userservice.common.domain.DateDeleteColumnEntity
-import com.brandjunhoe.userservice.user.domain.nums.*
-import org.hibernate.annotations.ColumnDefault
-import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.GenericGenerator
 import java.math.BigDecimal
 import java.util.*
@@ -18,9 +15,6 @@ class Cart(
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID(),
-
-    @Column(name = "usr_id", nullable = false)
-    val usrId: UUID? = null,
 
     @Column(name = "product_code", length = 255, nullable = false)
     val productCode: String,

@@ -1,13 +1,8 @@
 package com.brandjunhoe.userservice.user.presentation.dto
 
-import com.brandjunhoe.userservice.user.domain.Cart
-import com.brandjunhoe.userservice.user.domain.User
-import com.brandjunhoe.userservice.user.domain.Wish
-import org.springframework.beans.BeanUtils.copyProperties
-import org.springframework.security.crypto.password.PasswordEncoder
+import com.brandjunhoe.userservice.cart.domain.Cart
 import java.math.BigDecimal
 import java.util.*
-import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
 /**
@@ -26,7 +21,7 @@ data class ReqCartSaveDTO(
 
 ) {
 
-    fun toEntity(usrId: UUID, amount: BigDecimal): Cart =
-        Cart(usrId = usrId, productCode = productCode, itemCode = itemCode, quantity = quantity, amount = amount)
+    fun toEntity(amount: BigDecimal): Cart =
+        Cart(productCode = productCode, itemCode = itemCode, quantity = quantity, amount = amount)
 
 }

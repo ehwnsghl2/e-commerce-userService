@@ -1,4 +1,4 @@
-package com.brandjunhoe.userservice.user.domain
+package com.brandjunhoe.userservice.wish.domain
 
 import java.util.*
 

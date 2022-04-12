@@ -1,11 +1,7 @@
 package com.brandjunhoe.userservice.user.presentation.dto
 
-import com.brandjunhoe.userservice.user.domain.User
-import com.brandjunhoe.userservice.user.domain.Wish
-import org.springframework.beans.BeanUtils.copyProperties
-import org.springframework.security.crypto.password.PasswordEncoder
+import com.brandjunhoe.userservice.wish.domain.Wish
 import java.util.*
-import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
 /**
@@ -18,7 +14,7 @@ data class ReqWishSaveDTO(
 
 ) {
 
-    fun toEntity(usrId: UUID): Wish =
-        Wish(usrId = usrId, productCode = productCode)
+    fun toEntity(): Wish =
+        Wish(productCode = productCode)
 
 }

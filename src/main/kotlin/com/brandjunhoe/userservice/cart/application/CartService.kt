@@ -1,10 +1,11 @@
-package com.brandjunhoe.userservice.user.application
+package com.brandjunhoe.userservice.cart.application
 
+import com.brandjunhoe.userservice.cart.domain.Cart
+import com.brandjunhoe.userservice.client.ProductImplClient
 import com.brandjunhoe.userservice.common.exception.DataNotFoundException
 import com.brandjunhoe.userservice.user.domain.*
 import com.brandjunhoe.userservice.user.presentation.dto.ReqCartSaveDTO
 import com.brandjunhoe.userservice.user.presentation.dto.ReqCartUpdateDTO
-import com.brandjunhoe.userservice.user.presentation.dto.ReqWishSaveDTO
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
@@ -13,7 +14,8 @@ import java.util.*
 @Service
 class CartService(
     private val userRepository: UserRepository,
-    private val cartRepository: CartRepository
+    private val cartRepository: CartRepository,
+    private val productClient: ProductImplClient,
 ) {
 
 
@@ -22,7 +24,7 @@ class CartService(
 
         val user = findByUsrId(usrId)
 
-        user.addCart(req.toEntity(usrId, BigDecimal.ZERO))
+        user.addCart(req.toEntity(BigDecimal.ZERO))
 
     }
 
@@ -30,9 +32,20 @@ class CartService(
 
         val user = findByUsrId(usrId)
 
-        val productCodes = user.wishs.map { it.productCode }
+        val carts = user.carts
 
-        // 찜한 날짜, 상품 메인 이미지, 상품 이름,
+        // 카트 담은 날짜, 상품 메인 이미지, 상품 이름,
+        val products = productClient.findProductByProductcodes(carts.map { it.productCode })
+
+
+        carts.map {
+
+            products.find { product -> it.productCode == product.productCode }?.let {
+
+            }
+
+        }
+
 
     }
 

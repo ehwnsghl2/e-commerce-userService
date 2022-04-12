@@ -20,9 +20,6 @@ class UserMileage(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID(),
 
-    @Column(name = "usr_id", nullable = false)
-    val usrId: UUID? = null,
-
     @Column(name = "order_code", length = 255, nullable = false)
     val orderCode: String,
 

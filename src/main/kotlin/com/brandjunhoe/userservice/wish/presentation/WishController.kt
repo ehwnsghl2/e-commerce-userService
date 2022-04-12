@@ -1,17 +1,13 @@
-package com.brandjunhoe.userservice.user.presentation
+package com.brandjunhoe.userservice.wish.presentation
 
 import com.brandjunhoe.userservice.common.response.CommonResponse
-import com.brandjunhoe.userservice.user.application.UserService
-import com.brandjunhoe.userservice.user.application.WishService
-import com.brandjunhoe.userservice.user.presentation.dto.ReqSignupDTO
+import com.brandjunhoe.userservice.wish.application.WishService
 import com.brandjunhoe.userservice.user.presentation.dto.ReqWishSaveDTO
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
 import javax.validation.Valid
-import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
 
 @RestController
 @RequestMapping("/wish")
@@ -41,6 +37,11 @@ class WishController(private val wishService: WishService) {
     ): CommonResponse<Unit> {
         wishService.deleteById(id)
         return CommonResponse()
+    }
+
+    @GetMapping("/test")
+    fun test(){
+        wishService.test()
     }
 
 }

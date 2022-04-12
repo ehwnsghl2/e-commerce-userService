@@ -11,14 +11,14 @@ import javax.persistence.TemporalType
 @MappedSuperclass
 open class DateColumnEntity(
 
-        @CreationTimestamp
-        @Temporal(TemporalType.TIMESTAMP)
-        @Column(name = "regdate", nullable = false)
-        val regdate: Date? = null,
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "regdate", nullable = false)
+    val regdate: Date? = null,
 
-        @UpdateTimestamp
-        @Temporal(TemporalType.TIMESTAMP)
-        @Column(name = "moddate")
-        val moddate: Date? = null
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "moddate")
+    val moddate: Date? = null
 
 )

@@ -21,13 +21,6 @@ class UserShippingAddress(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID(),
 
-
-    /* @ManyToOne(targetEntity = User::class, fetch = FetchType.EAGER)
-     @JoinColumn(name = "usr_id")
-     var user: User? = null,*/
-    @Column(name = "usr_id", nullable = false)
-    val usrId: UUID? = null,
-
     @Column(name = "name", length = 30, nullable = false)
     val name: String,
 

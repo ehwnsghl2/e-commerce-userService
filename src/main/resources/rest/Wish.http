@@ -1,0 +1,5 @@
+GET http://localhost:9001/wish/test
+Content-Type: application/json
+
+
+###

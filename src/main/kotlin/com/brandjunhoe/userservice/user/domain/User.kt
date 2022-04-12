@@ -1,9 +1,11 @@
 package com.brandjunhoe.userservice.user.domain
 
+import com.brandjunhoe.userservice.cart.domain.Cart
 import com.brandjunhoe.userservice.common.domain.DateDeleteColumnEntity
 import com.brandjunhoe.userservice.user.domain.nums.GenderEnum
 import com.brandjunhoe.userservice.user.domain.nums.GradeEnum
 import com.brandjunhoe.userservice.user.domain.nums.JoinTypeEnum
+import com.brandjunhoe.userservice.wish.domain.Wish
 import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.GenericGenerator
@@ -14,7 +16,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "user")
-@Where(clause = "deldate IS NOT NULL")
+@Where(clause = "deldate IS NULL")
 class User(
 
     @Id
@@ -83,15 +85,19 @@ class User(
     var authDate: Date? = null,
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+    @JoinColumn(name = "usr_id")
     val shippingAddress: MutableList<UserShippingAddress> = mutableListOf(),
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+    @JoinColumn(name = "usr_id")
     val mileages: MutableList<UserMileage> = mutableListOf(),
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+    @JoinColumn(name = "usr_id")
     val wishs: MutableList<Wish> = mutableListOf(),
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+    @JoinColumn(name = "usr_id")
     val carts: MutableList<Cart> = mutableListOf()
 
 ) : DateDeleteColumnEntity() {

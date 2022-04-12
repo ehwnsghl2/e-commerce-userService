@@ -1,7 +1,7 @@
-package com.brandjunhoe.userservice.user.presentation
+package com.brandjunhoe.userservice.cart.presentation
 
 import com.brandjunhoe.userservice.common.response.CommonResponse
-import com.brandjunhoe.userservice.user.application.CartService
+import com.brandjunhoe.userservice.cart.application.CartService
 import com.brandjunhoe.userservice.user.presentation.dto.ReqCartSaveDTO
 import com.brandjunhoe.userservice.user.presentation.dto.ReqCartUpdateDTO
 import org.springframework.http.HttpStatus

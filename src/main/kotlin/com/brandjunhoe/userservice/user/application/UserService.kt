@@ -1,6 +1,7 @@
 package com.brandjunhoe.userservice.user.application
 
 import com.brandjunhoe.userservice.common.exception.BadRequestException
+import com.brandjunhoe.userservice.user.domain.User
 import com.brandjunhoe.userservice.user.domain.UserRepository
 import com.brandjunhoe.userservice.user.presentation.dto.ReqSignupDTO
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -17,8 +18,12 @@ class UserService(
 
         if (userRepository.existsByEmail(request.email)) throw BadRequestException("exist email")
 
-        userRepository.save(request.toEntity(passwordEncoder))
+        userRepository.save(request.toEntity(passwordEncoder.encode(request.password)))
 
+    }
+
+    fun findAll() : List<User> {
+       return userRepository.findAll()
     }
 
 
