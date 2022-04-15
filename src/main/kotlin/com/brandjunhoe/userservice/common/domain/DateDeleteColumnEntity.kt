@@ -1,6 +1,5 @@
 package com.brandjunhoe.userservice.common.domain
 
-import java.time.LocalDate
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.MappedSuperclass

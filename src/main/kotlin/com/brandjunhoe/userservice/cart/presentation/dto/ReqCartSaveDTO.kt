@@ -1,14 +1,18 @@
-package com.brandjunhoe.userservice.user.presentation.dto
+package com.brandjunhoe.userservice.cart.presentation.dto
 
 import com.brandjunhoe.userservice.cart.domain.Cart
 import java.math.BigDecimal
 import java.util.*
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 
 /**
  * Create by DJH on 2022/03/18.
  */
 data class ReqCartSaveDTO(
+
+    @field:NotNull
+    val usrId: UUID,
 
     @field:NotBlank
     val productCode: String,
@@ -16,12 +20,12 @@ data class ReqCartSaveDTO(
     @field:NotBlank
     val itemCode: String,
 
-    @field:NotBlank
+    @field:NotNull
     val quantity: Int
 
 ) {
 
-    fun toEntity(amount: BigDecimal): Cart =
-        Cart(productCode = productCode, itemCode = itemCode, quantity = quantity, amount = amount)
+    fun toEntity(): Cart =
+        Cart(usrId, productCode, itemCode, quantity)
 
 }

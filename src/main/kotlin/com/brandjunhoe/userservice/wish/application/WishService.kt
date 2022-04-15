@@ -6,7 +6,7 @@ import com.brandjunhoe.userservice.common.ext.convertStrToLocalDateTime
 import com.brandjunhoe.userservice.user.domain.User
 import com.brandjunhoe.userservice.user.domain.UserRepository
 import com.brandjunhoe.userservice.wish.domain.Wish
-import com.brandjunhoe.userservice.user.presentation.dto.ReqWishSaveDTO
+import com.brandjunhoe.userservice.wish.presentation.dto.ReqWishSaveDTO
 import com.brandjunhoe.userservice.wish.application.dto.WishDTO
 import com.brandjunhoe.userservice.wish.domain.WishRepository
 import org.springframework.stereotype.Service
@@ -21,12 +21,9 @@ class WishService(
 ) {
 
     @Transactional
-    fun save(usrId: UUID, req: ReqWishSaveDTO) {
-
-        val user = findByUsrId(usrId)
-
-        user.addWish(req.toEntity())
-
+    fun save(req: ReqWishSaveDTO) {
+        val user = findByUsrId(req.usrId)
+        user.addWish(req.productCode)
     }
 
     fun findAllByUsr(usrId: UUID): List<WishDTO?> {
@@ -39,7 +36,7 @@ class WishService(
 
         return wishs.map { wish ->
             products.find { product -> wish.productCode == product.productCode }?.let {
-                WishDTO(it.imagePath, it.name, convertStrToLocalDateTime(wish.regdate))
+                WishDTO(wish.id!!, it.imagePath, it.name, convertStrToLocalDateTime(wish.regdate))
             }
         }
 
@@ -47,8 +44,7 @@ class WishService(
 
     @Transactional
     fun deleteById(id: UUID) {
-        val wish = findById(id)
-        wish.delete()
+        wishRepository.deleteById(id)
     }
 
     private fun findByUsrId(usrId: UUID): User =
@@ -56,11 +52,6 @@ class WishService(
 
     private fun findById(id: UUID): Wish =
         wishRepository.findById(id) ?: throw DataNotFoundException("user not found")
-
-    fun test() {
-        val products = productClient.findProductByProductcodes(listOf("codeby", "codeby2"))
-        products.forEach { println(it) }
-    }
 
 
 }

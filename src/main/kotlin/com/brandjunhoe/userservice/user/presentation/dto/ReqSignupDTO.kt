@@ -3,6 +3,7 @@ package com.brandjunhoe.userservice.user.presentation.dto
 import com.brandjunhoe.userservice.user.domain.User
 import org.springframework.beans.BeanUtils.copyProperties
 import org.springframework.security.crypto.password.PasswordEncoder
+import java.util.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 
@@ -19,6 +20,6 @@ data class ReqSignupDTO(
 
 ) {
     fun toEntity(password: String): User =
-        User(email = email, password = password)
+        User(email = email, password = password, termDate = Date())
 
 }

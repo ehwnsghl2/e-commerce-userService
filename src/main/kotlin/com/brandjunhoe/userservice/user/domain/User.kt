@@ -19,12 +19,6 @@ import javax.persistence.*
 @Where(clause = "deldate IS NULL")
 class User(
 
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
-    val id: UUID = UUID.randomUUID(),
-
     @Column(name = "email", length = 255, nullable = false)
     val email: String,
 
@@ -55,7 +49,7 @@ class User(
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "term_date")
-    var termDate: Date? = null,
+    val termDate: Date? = null,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "join_type", columnDefinition = "enum")
@@ -84,6 +78,12 @@ class User(
     @Column(name = "auth_date")
     var authDate: Date? = null,
 
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    val id: UUID = UUID.randomUUID(),
+
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
     @JoinColumn(name = "usr_id")
     val shippingAddress: MutableList<UserShippingAddress> = mutableListOf(),
@@ -93,7 +93,7 @@ class User(
     val mileages: MutableList<UserMileage> = mutableListOf(),
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
-    @JoinColumn(name = "usr_id")
+     @JoinColumn(name = "usr_id")
     val wishs: MutableList<Wish> = mutableListOf(),
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
@@ -102,8 +102,8 @@ class User(
 
 ) : DateDeleteColumnEntity() {
 
-    fun addWish(wish: Wish) {
-        wishs.add(wish)
+    fun addWish(productCode: String) {
+        wishs.add(Wish(this.id, productCode))
     }
 
     fun addCart(cart: Cart) {

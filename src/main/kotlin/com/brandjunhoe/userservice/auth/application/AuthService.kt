@@ -20,7 +20,6 @@ class AuthService(
 
         val signinUser = userRepository.findByEmail(request.email) ?: throw DataNotFoundException("not found user")
 
-
         if (!passwordEncoder.matches(request.password, signinUser.password))
             throw BadRequestException("password not match")
 
