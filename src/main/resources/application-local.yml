@@ -1,7 +1,6 @@
 spring:
   cloud:
     config:
-      #name: config-server
       profile: local
       fail-fast: true
   config:
