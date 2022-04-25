@@ -61,6 +61,9 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
+
+    implementation("org.springframework.kafka:spring-kafka")
+
     implementation("mysql:mysql-connector-java")
     implementation("com.querydsl:querydsl-jpa") // querydsl
     implementation("com.vladmihalcea:hibernate-types-52:2.12.1")

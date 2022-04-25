@@ -14,11 +14,8 @@ import javax.persistence.*
 @Table(name = "user_mileage")
 class UserMileage(
 
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
-    val id: UUID = UUID.randomUUID(),
+    @Column(name = "usr_id", nullable = false)
+    val usrId: UUID,
 
     @Column(name = "order_code", length = 255, nullable = false)
     val orderCode: String,
@@ -32,11 +29,23 @@ class UserMileage(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "state", columnDefinition = "enum", nullable = false)
-    val state: MileageStateNum? = null,
+    var state: MileageStateNum? = null,
 
     @Column(name = "amount", nullable = false)
-    val amount: BigDecimal
+    val amount: BigDecimal,
+
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    val id: UUID = UUID.randomUUID()
 
 
-) : DateColumnEntity()
+) : DateColumnEntity() {
+
+    fun updateStateSave() {
+        this.state = MileageStateNum.SAVE
+    }
+
+}
 
