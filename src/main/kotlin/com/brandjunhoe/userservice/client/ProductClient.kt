@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 @FeignClient(name = "product-service")
 interface ProductClient {
 
-    @GetMapping("/product-internal")
+    @GetMapping("/api/v1/product-internal")
     fun findProductByProductcodes(@RequestParam("productCodes") productCodes: List<String>): CommonResponse<List<ProductDTO>>
 
 }
