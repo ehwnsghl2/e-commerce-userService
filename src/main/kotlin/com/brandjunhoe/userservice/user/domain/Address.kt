@@ -17,7 +17,6 @@ class Address(
 
 ) {
 
-    //
     fun getFullAddress(): String {
         return "$address $addressDetail"
     }

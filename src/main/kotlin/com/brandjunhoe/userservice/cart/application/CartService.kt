@@ -11,7 +11,6 @@ import com.brandjunhoe.userservice.cart.presentation.dto.ReqCartSaveDTO
 import com.brandjunhoe.userservice.cart.presentation.dto.ReqCartUpdateDTO
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.math.BigDecimal
 import java.util.*
 
 @Service
@@ -25,18 +24,18 @@ class CartService(
     @Transactional
     fun save(req: ReqCartSaveDTO) {
         val user = findByUsrId(req.usrId)
-        user.addCart(req.toEntity())
+        cartRepository.findByUsrIdAndProductCodeAndItemCode(req.usrId, req.productCode, req.itemCode)?.also {
+            it.addQuantity()
+        } ?: cartRepository.save(user.createCart(req.productCode, req.itemCode, req.quantity))
     }
 
-    fun findAllByUsr(usrId: UUID): List<CartDTO?> {
+    fun findAllByUsr(usrId: UUID): List<CartDTO> {
 
         val user = findByUsrId(usrId)
 
-        val carts = user.carts
+        val carts = cartRepository.findByUsrId(user.id)
 
-        // 카트 담은 날짜, 상품 메인 이미지, 상품 이름,
         val products = productClient.findProductByProductcodes(carts.map { it.productCode })
-
 
         return carts.map { cart ->
             products.find { product -> cart.productCode == product.productCode }?.let {
@@ -52,7 +51,7 @@ class CartService(
                     it.discountPrice,
                     it.soldOutState
                 )
-            }
+            } ?: throw DataNotFoundException("product not found")
         }
 
     }
@@ -60,7 +59,7 @@ class CartService(
     @Transactional
     fun updateById(id: UUID, req: ReqCartUpdateDTO) {
         val cart = findById(id)
-        cart.update(req.quantity)
+        cart.changeQuantity(req.quantity)
     }
 
     @Transactional

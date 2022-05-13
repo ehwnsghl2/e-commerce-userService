@@ -1,8 +1,7 @@
 package com.brandjunhoe.userservice.consumer.event
 
-import com.brandjunhoe.userservice.user.domain.UserMileage
-import com.brandjunhoe.userservice.user.domain.nums.MileageStateNum
-import com.brandjunhoe.userservice.user.domain.nums.MileageTypeNum
+import com.brandjunhoe.userservice.mileage.domain.enums.MileageStateNum
+import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
 import java.math.BigDecimal
 import java.util.*
 
@@ -11,7 +10,6 @@ import java.util.*
  */
 class MileageSaveDTO(
 
-    val id: UUID,
     val usrId: UUID,
     val orderCode: String,
     val productCode: String,
@@ -19,9 +17,4 @@ class MileageSaveDTO(
     val state: MileageStateNum,
     val amount: BigDecimal
 
-) {
-
-    fun toEntity() =
-        UserMileage(usrId, orderCode, productCode, type, state, amount)
-
-}
+)

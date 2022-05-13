@@ -21,8 +21,7 @@ class Cart(
     @Column(name = "item_code", length = 255, nullable = false)
     var itemCode: String,
 
-    @Column(name = "quantity", nullable = false)
-    var quantity: Int,
+    quantity: Int,
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -32,8 +31,16 @@ class Cart(
 
 ) : DateDeleteColumnEntity() {
 
-    fun update(quantity: Int?) {
-        if (quantity != null) this.quantity = quantity
+    @Column(name = "quantity", nullable = false)
+    final var quantity: Int = quantity
+        private set
+
+    fun changeQuantity(quantity: Int) {
+        this.quantity = quantity
+    }
+
+    fun addQuantity() {
+        this.quantity.plus(1)
     }
 
 }

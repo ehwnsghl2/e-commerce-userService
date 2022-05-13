@@ -5,6 +5,6 @@ package com.brandjunhoe.userservice.cart.presentation.dto
  */
 data class ReqCartUpdateDTO(
 
-    val quantity: Int? = null
+    val quantity: Int
 
 )

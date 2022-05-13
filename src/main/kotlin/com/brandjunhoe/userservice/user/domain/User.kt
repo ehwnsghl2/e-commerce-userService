@@ -2,6 +2,9 @@ package com.brandjunhoe.userservice.user.domain
 
 import com.brandjunhoe.userservice.cart.domain.Cart
 import com.brandjunhoe.userservice.common.domain.DateDeleteColumnEntity
+import com.brandjunhoe.userservice.mileage.domain.UserMileage
+import com.brandjunhoe.userservice.mileage.domain.enums.MileageStateNum
+import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
 import com.brandjunhoe.userservice.user.domain.nums.GenderEnum
 import com.brandjunhoe.userservice.user.domain.nums.GradeEnum
 import com.brandjunhoe.userservice.user.domain.nums.JoinTypeEnum
@@ -43,9 +46,6 @@ class User(
     @Column(name = "birthday", length = 8)
     val birthday: String? = null,
 
-    @Embedded
-    var address: Address? = null,
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "term_date")
@@ -84,31 +84,41 @@ class User(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID(),
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
-    @JoinColumn(name = "usr_id")
-    val shippingAddress: MutableList<UserShippingAddress> = mutableListOf(),
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
-    @JoinColumn(name = "usr_id")
-    val mileages: MutableList<UserMileage> = mutableListOf(),
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+    /* @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
      @JoinColumn(name = "usr_id")
-    val wishs: MutableList<Wish> = mutableListOf(),
+     val shippingAddress: MutableList<UserShippingAddress> = mutableListOf(),
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
-    @JoinColumn(name = "usr_id")
-    val carts: MutableList<Cart> = mutableListOf()
+     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+     @JoinColumn(name = "usr_id")
+     val mileages: MutableList<UserMileage> = mutableListOf(),
+
+     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+      @JoinColumn(name = "usr_id")
+     val wishs: MutableList<Wish> = mutableListOf(),
+
+     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+     @JoinColumn(name = "usr_id")
+     val carts: MutableList<Cart> = mutableListOf()*/
 
 ) : DateDeleteColumnEntity() {
 
-    fun addWish(productCode: String) {
-        wishs.add(Wish(this.id, productCode))
-    }
+    fun createWish(
+        productCode: String
+    ): Wish = Wish(this.id, productCode)
 
-    fun addCart(cart: Cart) {
-        carts.add(cart)
-    }
+    fun createMileageReady(
+        orderCode: String,
+        productCode: String,
+        type: MileageTypeNum,
+        state: MileageStateNum,
+        amount: BigDecimal
+    ): UserMileage = UserMileage(this.id, orderCode, productCode, type, state, amount)
+
+    fun createCart(
+        productCode: String,
+        itemCode: String,
+        quantity: Int
+    ): Cart = Cart(this.id, productCode, itemCode, quantity)
 
 }
 

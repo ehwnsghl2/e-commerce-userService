@@ -27,7 +27,7 @@ class CartController(private val cartService: CartService) {
     @GetMapping("/usr/{usrId}")
     fun findAllByUsr(
         @PathVariable(value = "usrId") @Valid @NotBlank usrId: UUID
-    ): CommonResponse<List<CartDTO?>> = CommonResponse(cartService.findAllByUsr(usrId))
+    ): CommonResponse<List<CartDTO>> = CommonResponse(cartService.findAllByUsr(usrId))
 
 
     @PatchMapping("/{id}")

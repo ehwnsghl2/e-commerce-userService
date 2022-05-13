@@ -1,4 +1,4 @@
-package com.brandjunhoe.userservice.user.domain.nums
+package com.brandjunhoe.userservice.mileage.domain.enums
 
 enum class MileageTypeNum {
     PRODUCT,  // 상품 적립

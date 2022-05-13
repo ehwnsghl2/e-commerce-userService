@@ -1,8 +1,8 @@
 package com.brandjunhoe.userservice.consumer
 
 import com.brandjunhoe.userservice.consumer.event.MileageSaveDTO
-import com.brandjunhoe.userservice.user.application.UserMileageService
-import com.brandjunhoe.userservice.user.domain.nums.MileageTypeNum
+import com.brandjunhoe.userservice.mileage.application.UserMileageService
+import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.kafka.annotation.KafkaListener
@@ -28,7 +28,7 @@ class MileageSaveConsumer(
         val mileageSaveDTO = objectMapper.readValue(data.value(), MileageSaveDTO::class.java)
 
         when (mileageSaveDTO.type) {
-            MileageTypeNum.PRODUCT -> mileageService.saveMileagePurchase(mileageSaveDTO)
+            MileageTypeNum.PRODUCT -> mileageService.savePurchaseReady(mileageSaveDTO)
             MileageTypeNum.TEXT_REVIEW, MileageTypeNum.PRODUCT -> mileageService.saveMileageReview(mileageSaveDTO)
             else -> IllegalArgumentException()
         }

@@ -16,7 +16,7 @@ class WishController(private val wishService: WishService) {
 
 
     @PostMapping
-    fun save(@RequestBody @Valid req: ReqWishSaveDTO): CommonResponse<Unit> {
+    fun saveWish(@RequestBody @Valid req: ReqWishSaveDTO): CommonResponse<Unit> {
         wishService.save(req)
         return CommonResponse(HttpStatus.CREATED)
     }
@@ -24,7 +24,7 @@ class WishController(private val wishService: WishService) {
     @GetMapping("/{usrId}")
     fun findAllByUsr(
         @PathVariable("usrId") @Valid @NotBlank usrId: UUID
-    ): CommonResponse<List<WishDTO?>> =
+    ): CommonResponse<List<WishDTO>> =
         CommonResponse(wishService.findAllByUsr(usrId))
 
 

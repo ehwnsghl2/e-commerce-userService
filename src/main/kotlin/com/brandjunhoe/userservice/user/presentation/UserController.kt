@@ -13,11 +13,6 @@ import javax.validation.Valid
 class UserController(private val userService: UserService) {
 
 
-    @GetMapping
-    fun findAll() : List<User>{
-        return userService.findAll()
-    }
-
     @PostMapping("/signup")
     fun signup(@RequestBody @Valid req: ReqSignupDTO): CommonResponse<Unit> {
         userService.signup(req)

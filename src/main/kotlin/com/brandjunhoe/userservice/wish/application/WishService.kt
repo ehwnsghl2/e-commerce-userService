@@ -1,6 +1,7 @@
 package com.brandjunhoe.userservice.wish.application
 
 import com.brandjunhoe.userservice.client.ProductImplClient
+import com.brandjunhoe.userservice.common.exception.BadRequestException
 import com.brandjunhoe.userservice.common.exception.DataNotFoundException
 import com.brandjunhoe.userservice.common.ext.convertStrToLocalDateTime
 import com.brandjunhoe.userservice.user.domain.User
@@ -20,29 +21,28 @@ class WishService(
     private val productClient: ProductImplClient
 ) {
 
-    @Transactional
     fun save(req: ReqWishSaveDTO) {
         val user = findByUsrId(req.usrId)
-        user.addWish(req.productCode)
+        wishRepository.findByUsrIdAndProductCode(req.usrId, req.productCode)?.run {
+            throw BadRequestException("already wish")
+        } ?: wishRepository.save(user.createWish(req.productCode))
     }
 
-    fun findAllByUsr(usrId: UUID): List<WishDTO?> {
+    @Transactional(readOnly = true)
+    fun findAllByUsr(usrId: UUID): List<WishDTO> {
 
         val user = findByUsrId(usrId)
-
-        val wishs = user.wishs
-
+        val wishs = wishRepository.findByUsrId(user.id)
         val products = productClient.findProductByProductcodes(wishs.map { it.productCode })
 
         return wishs.map { wish ->
             products.find { product -> wish.productCode == product.productCode }?.let {
                 WishDTO(wish.id!!, it.imagePath, it.name, convertStrToLocalDateTime(wish.regdate))
-            }
+            } ?: throw DataNotFoundException("product not found")
         }
 
     }
 
-    @Transactional
     fun deleteById(id: UUID) {
         wishRepository.deleteById(id)
     }

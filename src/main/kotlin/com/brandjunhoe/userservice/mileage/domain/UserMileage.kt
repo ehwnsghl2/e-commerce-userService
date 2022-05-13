@@ -1,10 +1,8 @@
-package com.brandjunhoe.userservice.user.domain
+package com.brandjunhoe.userservice.mileage.domain
 
 import com.brandjunhoe.userservice.common.domain.DateColumnEntity
-import com.brandjunhoe.userservice.common.domain.DateDeleteColumnEntity
-import com.brandjunhoe.userservice.user.domain.nums.*
-import org.hibernate.annotations.ColumnDefault
-import org.hibernate.annotations.CreationTimestamp
+import com.brandjunhoe.userservice.mileage.domain.enums.MileageStateNum
+import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
 import org.hibernate.annotations.GenericGenerator
 import java.math.BigDecimal
 import java.util.*

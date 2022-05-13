@@ -13,18 +13,13 @@ class UserService(
     private val passwordEncoder: PasswordEncoder
 ) {
 
-
     fun signup(request: ReqSignupDTO) {
 
-        if (userRepository.existsByEmail(request.email)) throw BadRequestException("exist email")
+        if (userRepository.existsByEmail(request.email))
+            throw BadRequestException("exist email")
 
         userRepository.save(request.toEntity(passwordEncoder.encode(request.password)))
 
     }
-
-    fun findAll() : List<User> {
-       return userRepository.findAll()
-    }
-
 
 }

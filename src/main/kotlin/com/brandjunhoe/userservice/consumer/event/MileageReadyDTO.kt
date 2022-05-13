@@ -1,6 +1,6 @@
 package com.brandjunhoe.userservice.consumer.event
 
-import com.brandjunhoe.userservice.user.domain.nums.MileageTypeNum
+import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
 import java.math.BigDecimal
 import java.util.*
 
