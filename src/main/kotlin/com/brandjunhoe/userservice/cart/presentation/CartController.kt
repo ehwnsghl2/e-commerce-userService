@@ -26,13 +26,13 @@ class CartController(private val cartService: CartService) {
 
     @GetMapping("/usr/{usrId}")
     fun findAllByUsr(
-        @PathVariable(value = "usrId") @Valid @NotBlank usrId: UUID
+        @PathVariable("usrId") @Valid @NotBlank usrId: UUID
     ): CommonResponse<List<CartDTO>> = CommonResponse(cartService.findAllByUsr(usrId))
 
 
     @PatchMapping("/{id}")
     fun updateById(
-        @PathVariable(value = "id") @Valid @NotBlank id: UUID,
+        @PathVariable("id") @Valid @NotBlank id: UUID,
         @RequestBody req: ReqCartUpdateDTO
     ): CommonResponse<Unit> {
         cartService.updateById(id, req)
@@ -41,7 +41,7 @@ class CartController(private val cartService: CartService) {
 
     @DeleteMapping("/{id}")
     fun deleteCart(
-        @PathVariable(value = "id") @Valid @NotBlank id: UUID
+        @PathVariable("id") @Valid @NotBlank id: UUID
     ): CommonResponse<Unit> {
         cartService.deleteById(id)
         return CommonResponse()

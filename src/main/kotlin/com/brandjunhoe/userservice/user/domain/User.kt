@@ -5,6 +5,8 @@ import com.brandjunhoe.userservice.common.domain.DateDeleteColumnEntity
 import com.brandjunhoe.userservice.mileage.domain.UserMileage
 import com.brandjunhoe.userservice.mileage.domain.enums.MileageStateNum
 import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
+import com.brandjunhoe.userservice.shipping.domain.Address
+import com.brandjunhoe.userservice.shipping.domain.UserShippingAddress
 import com.brandjunhoe.userservice.user.domain.nums.GenderEnum
 import com.brandjunhoe.userservice.user.domain.nums.GradeEnum
 import com.brandjunhoe.userservice.user.domain.nums.JoinTypeEnum
@@ -119,6 +121,14 @@ class User(
         itemCode: String,
         quantity: Int
     ): Cart = Cart(this.id, productCode, itemCode, quantity)
+
+    fun createShippingAddress(
+        receiver: String,
+        phone: String,
+        address: Address,
+        default: Boolean
+    ): UserShippingAddress =
+        UserShippingAddress(this.id, receiver, phone, address, default)
 
 }
 

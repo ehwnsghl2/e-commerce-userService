@@ -1,4 +1,4 @@
-package com.brandjunhoe.userservice.user.domain
+package com.brandjunhoe.userservice.shipping.domain
 
 import javax.persistence.Column
 import javax.persistence.Embeddable
@@ -12,13 +12,7 @@ class Address(
     @Column(name = "address", length = 255, nullable = false)
     val address: String,
 
-    @Column(name = "address_detail", length = 255)
+    @Column(name = "address_detail", length = 255, nullable = false)
     val addressDetail: String
 
-) {
-
-    fun getFullAddress(): String {
-        return "$address $addressDetail"
-    }
-
-}
+)
