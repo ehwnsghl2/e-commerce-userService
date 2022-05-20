@@ -29,6 +29,7 @@ class CartService(
         } ?: cartRepository.save(user.createCart(req.productCode, req.itemCode, req.quantity))
     }
 
+    @Transactional(readOnly = true)
     fun findAllByUsr(usrId: UUID): List<CartDTO> {
 
         val user = findByUsrId(usrId)

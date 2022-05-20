@@ -83,9 +83,7 @@ class GlobalExceptionHandler {
             else -> ErrorCode.INTERNAL_SERVER_ERROR
         }
 
-        println(e)
-
-        return CommonResponse(errorCode.code, errorCode.message)
+        return CommonResponse(errorCode.status, errorCode.code,  errorCode.message)
 
     }
 

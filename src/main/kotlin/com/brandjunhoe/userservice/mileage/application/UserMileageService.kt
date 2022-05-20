@@ -2,13 +2,13 @@ package com.brandjunhoe.userservice.mileage.application
 
 import com.brandjunhoe.userservice.common.exception.BadRequestException
 import com.brandjunhoe.userservice.common.exception.DataNotFoundException
-import com.brandjunhoe.userservice.consumer.event.MileageSaveDTO
+import com.brandjunhoe.userservice.consumer.dto.MileageSaveDTO
 import com.brandjunhoe.userservice.mileage.domain.UserMileage
 import com.brandjunhoe.userservice.mileage.domain.UserMileageRepository
 import com.brandjunhoe.userservice.mileage.domain.enums.MileageStateNum
-import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
 import com.brandjunhoe.userservice.user.domain.UserRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 /**
@@ -21,6 +21,7 @@ class UserMileageService(
 ) {
 
 
+    @Transactional
     fun savePurchaseReady(request: MileageSaveDTO) {
 
         when (request.state) {
@@ -31,14 +32,9 @@ class UserMileageService(
 
     }
 
+    @Transactional
     fun saveMileageReview(request: MileageSaveDTO) {
-
-        val userMileage = saveMileage(request)
-
-        if (request.type == MileageTypeNum.PHOTO_REVIEW) {
-
-        }
-
+        saveMileage(request)
     }
 
     private fun saveMileage(request: MileageSaveDTO) {

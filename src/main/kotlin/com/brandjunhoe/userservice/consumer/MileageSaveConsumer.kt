@@ -1,6 +1,6 @@
 package com.brandjunhoe.userservice.consumer
 
-import com.brandjunhoe.userservice.consumer.event.MileageSaveDTO
+import com.brandjunhoe.userservice.consumer.dto.MileageSaveDTO
 import com.brandjunhoe.userservice.mileage.application.UserMileageService
 import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
 import com.fasterxml.jackson.databind.ObjectMapper
