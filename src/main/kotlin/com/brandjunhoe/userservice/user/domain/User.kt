@@ -30,56 +30,6 @@ class User(
     @Column(name = "password", length = 255, nullable = false)
     val password: String,
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "grade", columnDefinition = "enum", nullable = false)
-    @ColumnDefault("FAMILY")
-    val grade: GradeEnum = GradeEnum.FAMILY,
-
-    @Column(name = "name", length = 10)
-    val name: String? = null,
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender", columnDefinition = "enum")
-    val gender: GenderEnum? = null,
-
-    @Column(name = "phone", length = 11)
-    val phone: String? = null,
-
-    @Column(name = "birthday", length = 8)
-    val birthday: String? = null,
-
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "term_date")
-    val termDate: Date? = null,
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "join_type", columnDefinition = "enum")
-    val joinType: JoinTypeEnum? = null,
-
-    @Column(name = "total_order_count")
-    val totalOrderCount: Int = 0,
-
-    @Column(name = "total_payment_count")
-    val totalPaymentCount: Int = 0,
-
-    @Column(name = "total_mileage_amount")
-    val totalMileageAmount: BigDecimal = BigDecimal.ZERO,
-
-    @Column(name = "total_order_amount")
-    val totalOrderAmount: BigDecimal = BigDecimal.ZERO,
-
-    @Column(name = "total_payment_amount")
-    val totalPaymentAmount: BigDecimal = BigDecimal.ZERO,
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "login_date")
-    var loginDate: Date? = null,
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "auth_date")
-    var authDate: Date? = null,
-
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
@@ -88,17 +38,77 @@ class User(
 
 ) : DateDeleteColumnEntity() {
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "grade", columnDefinition = "enum", nullable = false)
+    @ColumnDefault("FAMILY")
+    final var grade: GradeEnum = GradeEnum.FAMILY
+        private set
+
+    @Column(name = "name", length = 10)
+    final var name: String? = null
+        private set
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", columnDefinition = "enum")
+    final var gender: GenderEnum? = null
+        private set
+
+    @Column(name = "phone", length = 11)
+    final var phone: String? = null
+        private set
+
+    @Column(name = "birthday", length = 8)
+    final var birthday: String? = null
+        private set
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "join_type", columnDefinition = "enum")
+    final var joinType: JoinTypeEnum? = null
+        private set
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "login_date")
+    final var loginDate: Date? = null
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "auth_date")
+    final var authDate: Date? = null
+        private set
+
+    @Column(name = "total_order_count")
+    final var totalOrderCount: Int = 0
+        private set
+
+    @Column(name = "total_payment_count")
+    final var totalPaymentCount: Int = 0
+        private set
+
+    @Column(name = "total_mileage_amount")
+    final var totalMileageAmount: BigDecimal = BigDecimal.ZERO
+        private set
+
+    @Column(name = "total_order_amount")
+    final var totalOrderAmount: BigDecimal = BigDecimal.ZERO
+        private set
+
+    @Column(name = "total_payment_amount")
+    final var totalPaymentAmount: BigDecimal = BigDecimal.ZERO
+        private set
+
+    fun login() {
+        this.loginDate = Date()
+    }
+
     fun createWish(
         productCode: String
     ): Wish = Wish(this.id, productCode)
 
     fun createMileageReady(
-        orderCode: String,
-        productCode: String,
+        orderProductCode: String,
         type: MileageTypeNum,
         state: MileageStateNum,
         amount: BigDecimal
-    ): UserMileage = UserMileage(this.id, orderCode, productCode, type, state, amount)
+    ): UserMileage = UserMileage(this.id, orderProductCode, type, state, amount)
 
     fun createCart(
         productCode: String,
@@ -113,6 +123,7 @@ class User(
         default: Boolean
     ): UserShippingAddress =
         UserShippingAddress(this.id, receiver, phone, address, default)
+
 
 }
 

@@ -19,7 +19,8 @@ data class ReqSignupDTO(
     val password: String
 
 ) {
+
     fun toEntity(password: String): User =
-        User(email = email, password = password, termDate = Date())
+        User(email, password)
 
 }

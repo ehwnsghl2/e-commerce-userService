@@ -11,8 +11,7 @@ import java.util.*
 class MileageSaveDTO(
 
     val usrId: UUID,
-    val orderCode: String,
-    val productCode: String,
+    val orderProductCode: String,
     val type: MileageTypeNum,
     val state: MileageStateNum,
     val amount: BigDecimal

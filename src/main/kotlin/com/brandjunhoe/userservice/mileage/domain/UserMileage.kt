@@ -15,11 +15,8 @@ class UserMileage(
     @Column(name = "usr_id", nullable = false)
     val usrId: UUID,
 
-    @Column(name = "order_code", length = 255, nullable = false)
-    val orderCode: String,
-
-    @Column(name = "product_code", length = 255, nullable = false)
-    val productCode: String,
+    @Column(name = "order_product_code", length = 255, nullable = false)
+    val orderProductCode: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", columnDefinition = "enum", nullable = false)

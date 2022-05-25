@@ -12,4 +12,5 @@ class ProductImplClient(private val productClient: ProductClient) {
     fun findProductByProductcodes(orderProductCodes: List<String>): List<ProductDTO> =
         productClient.findProductByProductcodes(orderProductCodes).data!!
 
+
 }

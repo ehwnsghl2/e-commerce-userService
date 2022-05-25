@@ -19,7 +19,7 @@ class Cart(
     val productCode: String,
 
     @Column(name = "item_code", length = 255, nullable = false)
-    var itemCode: String,
+    val itemCode: String,
 
     quantity: Int,
 
