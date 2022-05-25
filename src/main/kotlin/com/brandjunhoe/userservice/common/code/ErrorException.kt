@@ -20,6 +20,15 @@ enum class ErrorException {
     /** 임시 파일 적용 시 BODY가 없을 때 **/
     DataNotFoundException,
 
+    /** 회원을 차지 못할 때 **/
+    UserNotFoundException,
+
+    /** 장바구니를 차지 못할 때 **/
+    CartNotFoundException,
+
+    /** 마일리지 차지 못할 때 **/
+    UserMileageNotFoundException,
+
     /** 중복된 데이터 처리 에러 핸들러 **/
     DuplicateDataException,
 
@@ -156,6 +165,12 @@ enum class ErrorException {
     FileAwsS3ProcessException,
 
     /** 잘못된 요청 */
-    BadRequestException;
+    BadRequestException,
+
+    /** 장바구니 상품 매칭 실패 */
+    CartProductNotMatchingException,
+
+    /** 찜하기 상품 매칭 실패 */
+    WishProductNotMatchingException;
 
 }

@@ -1,14 +1,16 @@
 package com.brandjunhoe.userservice.cart.application
 
 import com.brandjunhoe.userservice.cart.application.dto.CartDTO
+import com.brandjunhoe.userservice.cart.application.exception.CartNotFoundException
+import com.brandjunhoe.userservice.cart.application.exception.CartProductNotMatchingException
 import com.brandjunhoe.userservice.cart.domain.Cart
 import com.brandjunhoe.userservice.cart.domain.CartRepository
 import com.brandjunhoe.userservice.client.ProductImplClient
-import com.brandjunhoe.userservice.common.exception.DataNotFoundException
 import com.brandjunhoe.userservice.user.domain.User
 import com.brandjunhoe.userservice.user.domain.UserRepository
 import com.brandjunhoe.userservice.cart.presentation.dto.ReqCartSaveDTO
 import com.brandjunhoe.userservice.cart.presentation.dto.ReqCartUpdateDTO
+import com.brandjunhoe.userservice.user.application.exception.UserNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -33,9 +35,7 @@ class CartService(
     fun findAllByUsr(usrId: UUID): List<CartDTO> {
 
         val user = findByUsrId(usrId)
-
         val carts = cartRepository.findByUsrId(user.id)
-
         val products = productClient.findProductByProductcodes(carts.map { it.productCode })
 
         return carts.map { cart ->
@@ -52,7 +52,7 @@ class CartService(
                     it.discountPrice,
                     it.soldOutState
                 )
-            } ?: throw DataNotFoundException("product not found")
+            } ?: throw CartProductNotMatchingException()
         }
 
     }
@@ -70,9 +70,9 @@ class CartService(
     }
 
     private fun findByUsrId(usrId: UUID): User =
-        userRepository.findById(usrId) ?: throw DataNotFoundException("user not found")
+        userRepository.findById(usrId) ?: throw UserNotFoundException()
 
     private fun findById(id: UUID): Cart =
-        cartRepository.findById(id) ?: throw DataNotFoundException("user not found")
+        cartRepository.findById(id) ?: throw CartNotFoundException()
 
 }

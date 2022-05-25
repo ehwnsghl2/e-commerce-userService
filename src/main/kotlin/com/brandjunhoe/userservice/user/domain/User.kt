@@ -84,23 +84,7 @@ class User(
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    val id: UUID = UUID.randomUUID(),
-
-    /* @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
-     @JoinColumn(name = "usr_id")
-     val shippingAddress: MutableList<UserShippingAddress> = mutableListOf(),
-
-     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
-     @JoinColumn(name = "usr_id")
-     val mileages: MutableList<UserMileage> = mutableListOf(),
-
-     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
-      @JoinColumn(name = "usr_id")
-     val wishs: MutableList<Wish> = mutableListOf(),
-
-     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
-     @JoinColumn(name = "usr_id")
-     val carts: MutableList<Cart> = mutableListOf()*/
+    val id: UUID = UUID.randomUUID()
 
 ) : DateDeleteColumnEntity() {
 

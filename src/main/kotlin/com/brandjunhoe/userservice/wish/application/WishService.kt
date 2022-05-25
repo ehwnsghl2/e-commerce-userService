@@ -4,11 +4,14 @@ import com.brandjunhoe.userservice.client.ProductImplClient
 import com.brandjunhoe.userservice.common.exception.BadRequestException
 import com.brandjunhoe.userservice.common.exception.DataNotFoundException
 import com.brandjunhoe.userservice.common.ext.convertStrToLocalDateTime
+import com.brandjunhoe.userservice.user.application.exception.UserNotFoundException
 import com.brandjunhoe.userservice.user.domain.User
 import com.brandjunhoe.userservice.user.domain.UserRepository
 import com.brandjunhoe.userservice.wish.domain.Wish
 import com.brandjunhoe.userservice.wish.presentation.dto.ReqWishSaveDTO
 import com.brandjunhoe.userservice.wish.application.dto.WishDTO
+import com.brandjunhoe.userservice.wish.application.exception.WishNotFoundException
+import com.brandjunhoe.userservice.wish.application.exception.WishProductNotMatchingException
 import com.brandjunhoe.userservice.wish.domain.WishRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -23,9 +26,11 @@ class WishService(
 
     fun save(req: ReqWishSaveDTO) {
         val user = findByUsrId(req.usrId)
-        wishRepository.findByUsrIdAndProductCode(req.usrId, req.productCode)?.run {
-            throw BadRequestException("already wish")
-        } ?: wishRepository.save(user.createWish(req.productCode))
+
+        wishRepository.findByUsrIdAndProductCode(req.usrId, req.productCode)
+            ?: throw BadRequestException("already wish")
+
+        wishRepository.save(user.createWish(req.productCode))
     }
 
     @Transactional(readOnly = true)
@@ -38,9 +43,9 @@ class WishService(
         return wishs.map { wish ->
             products.find { product -> wish.productCode == product.productCode }?.let {
                 WishDTO(wish.id!!, it.imagePath, it.name, convertStrToLocalDateTime(wish.regdate))
-            } ?: throw DataNotFoundException("product not found")
-        }
+            } ?: throw WishProductNotMatchingException()
 
+        }
     }
 
     fun deleteById(id: UUID) {
@@ -48,10 +53,10 @@ class WishService(
     }
 
     private fun findByUsrId(usrId: UUID): User =
-        userRepository.findById(usrId) ?: throw DataNotFoundException("user not found")
+        userRepository.findById(usrId) ?: throw UserNotFoundException()
 
     private fun findById(id: UUID): Wish =
-        wishRepository.findById(id) ?: throw DataNotFoundException("user not found")
+        wishRepository.findById(id) ?: throw WishNotFoundException()
 
 
 }

@@ -23,11 +23,9 @@ class UserMileage(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", columnDefinition = "enum", nullable = false)
-    val type: MileageTypeNum? = null,
+    val type: MileageTypeNum,
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "state", columnDefinition = "enum", nullable = false)
-    var state: MileageStateNum? = null,
+    state: MileageStateNum,
 
     @Column(name = "amount", nullable = false)
     val amount: BigDecimal,
@@ -40,6 +38,11 @@ class UserMileage(
 
 
 ) : DateColumnEntity() {
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state", columnDefinition = "enum", nullable = false)
+    final var state: MileageStateNum? = null
+        private set
 
     fun updateStateSave() {
         this.state = MileageStateNum.SAVE
