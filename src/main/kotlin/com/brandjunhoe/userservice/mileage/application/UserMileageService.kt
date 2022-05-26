@@ -1,5 +1,6 @@
 package com.brandjunhoe.userservice.mileage.application
 
+import com.brandjunhoe.userservice.common.code.ErrorCode
 import com.brandjunhoe.userservice.common.exception.BadRequestException
 import com.brandjunhoe.userservice.consumer.dto.MileageSaveDTO
 import com.brandjunhoe.userservice.mileage.application.exception.UserMileageNotFoundException
@@ -50,8 +51,9 @@ class UserMileageService(
             request.amount
         )
 
-        findMileage(request.usrId, request.orderProductCode, request.type)
-            ?: throw BadRequestException("already orderProduct purchase mileage")
+        val mileage = findMileage(request.usrId, request.orderProductCode, request.type)
+
+        if (mileage != null) throw UserMileageNotFoundException()
 
         userMileageRepository.save(createMileage)
 

@@ -35,28 +35,28 @@ class UserShippingAddress(
 ) : DateColumnEntity() {
 
     @Column(name = "receiver", length = 30, nullable = false)
-    final var receiver: String = receiver
-        private set
+    var receiver: String = receiver
+        protected set
 
     @Column(name = "phone", length = 30, nullable = false)
-    final var phone: String = phone
-        private set
+     var phone: String = phone
+        protected set
 
     @Embedded
-    final var address: Address = address
-        private set
+     var address: Address = address
+        protected set
 
 
     @Column(name = "default")
-    final var default: Boolean = false
-        private set
+     var default: Boolean = false
+        protected set
 
 
     fun update(request: UserShippingAddressUpdateDTO) {
-       request.receiver?.let { this.receiver = it  }
-       request.phone?.let { this.phone = it  }
-       request.address?.let { this.address = it  }
-       request.default?.let { this.default = it  }
+        request.receiver?.let { this.receiver = it }
+        request.phone?.let { this.phone = it }
+        request.address?.let { this.address = it }
+        request.default?.let { this.default = it }
     }
 
 }

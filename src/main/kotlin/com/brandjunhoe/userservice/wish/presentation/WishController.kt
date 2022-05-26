@@ -4,6 +4,7 @@ import com.brandjunhoe.userservice.common.response.CommonResponse
 import com.brandjunhoe.userservice.wish.presentation.dto.ReqWishSaveDTO
 import com.brandjunhoe.userservice.wish.application.WishService
 import com.brandjunhoe.userservice.wish.application.dto.WishDTO
+import com.brandjunhoe.userservice.wish.application.exception.WishAlreadyException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -17,6 +18,7 @@ class WishController(private val wishService: WishService) {
 
     @PostMapping
     fun saveWish(@RequestBody @Valid req: ReqWishSaveDTO): CommonResponse<Unit> {
+        throw WishAlreadyException()
         wishService.save(req)
         return CommonResponse(HttpStatus.CREATED)
     }

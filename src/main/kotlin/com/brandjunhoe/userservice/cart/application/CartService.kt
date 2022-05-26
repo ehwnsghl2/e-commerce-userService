@@ -26,9 +26,12 @@ class CartService(
     @Transactional
     fun save(req: ReqCartSaveDTO) {
         val user = findByUsrId(req.usrId)
-        cartRepository.findByUsrIdAndProductCodeAndItemCode(req.usrId, req.productCode, req.itemCode)?.also {
-            it.addQuantity()
-        } ?: cartRepository.save(user.createCart(req.productCode, req.itemCode, req.quantity))
+
+        val cart = cartRepository.findByUsrIdAndProductCodeAndItemCode(req.usrId, req.productCode, req.itemCode)
+
+        cart?.run { addQuantity() }
+            ?: cartRepository.save(user.createCart(req.productCode, req.itemCode, req.quantity))
+
     }
 
     @Transactional(readOnly = true)

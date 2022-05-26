@@ -2,17 +2,17 @@ package com.brandjunhoe.userservice.wish.application
 
 import com.brandjunhoe.userservice.client.ProductImplClient
 import com.brandjunhoe.userservice.common.exception.BadRequestException
-import com.brandjunhoe.userservice.common.exception.DataNotFoundException
 import com.brandjunhoe.userservice.common.ext.convertStrToLocalDateTime
 import com.brandjunhoe.userservice.user.application.exception.UserNotFoundException
 import com.brandjunhoe.userservice.user.domain.User
 import com.brandjunhoe.userservice.user.domain.UserRepository
-import com.brandjunhoe.userservice.wish.domain.Wish
-import com.brandjunhoe.userservice.wish.presentation.dto.ReqWishSaveDTO
 import com.brandjunhoe.userservice.wish.application.dto.WishDTO
+import com.brandjunhoe.userservice.wish.application.exception.WishAlreadyException
 import com.brandjunhoe.userservice.wish.application.exception.WishNotFoundException
 import com.brandjunhoe.userservice.wish.application.exception.WishProductNotMatchingException
+import com.brandjunhoe.userservice.wish.domain.Wish
 import com.brandjunhoe.userservice.wish.domain.WishRepository
+import com.brandjunhoe.userservice.wish.presentation.dto.ReqWishSaveDTO
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -28,7 +28,7 @@ class WishService(
         val user = findByUsrId(req.usrId)
 
         wishRepository.findByUsrIdAndProductCode(req.usrId, req.productCode)
-            ?: throw BadRequestException("already wish")
+            ?: throw WishAlreadyException()
 
         wishRepository.save(user.createWish(req.productCode))
     }

@@ -32,8 +32,8 @@ class Cart(
 ) : DateDeleteColumnEntity() {
 
     @Column(name = "quantity", nullable = false)
-    final var quantity: Int = quantity
-        private set
+    var quantity: Int = quantity
+        protected set
 
     fun changeQuantity(quantity: Int) {
         this.quantity = quantity

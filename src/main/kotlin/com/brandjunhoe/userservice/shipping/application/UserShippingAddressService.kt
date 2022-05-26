@@ -5,6 +5,7 @@ import com.brandjunhoe.userservice.shipping.application.dto.UserShippingAddressD
 import com.brandjunhoe.userservice.shipping.domain.UserShippingAddressRepository
 import com.brandjunhoe.userservice.shipping.presiontation.dto.UserShippingAddressSaveDTO
 import com.brandjunhoe.userservice.shipping.presiontation.dto.UserShippingAddressUpdateDTO
+import com.brandjunhoe.userservice.user.application.exception.UserNotFoundException
 import com.brandjunhoe.userservice.user.domain.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -31,7 +32,7 @@ class UserShippingAddressService(
 
     fun save(request: UserShippingAddressSaveDTO) {
         val user = userRepository.findById(request.usrId)
-            ?: throw DataNotFoundException("user not found")
+            ?: throw UserNotFoundException()
 
         userShippingAddressRepository.save(
             user.createShippingAddress(

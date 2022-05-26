@@ -38,8 +38,8 @@ class UserMileage(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "state", columnDefinition = "enum", nullable = false)
-    final var state: MileageStateNum? = null
-        private set
+    var state: MileageStateNum? = null
+        protected set
 
     fun updateStateSave() {
         this.state = MileageStateNum.SAVE

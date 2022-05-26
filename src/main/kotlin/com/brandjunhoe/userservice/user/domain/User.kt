@@ -41,59 +41,60 @@ class User(
     @Enumerated(EnumType.STRING)
     @Column(name = "grade", columnDefinition = "enum", nullable = false)
     @ColumnDefault("FAMILY")
-    final var grade: GradeEnum = GradeEnum.FAMILY
-        private set
+    var grade: GradeEnum = GradeEnum.FAMILY
+        protected set
 
     @Column(name = "name", length = 10)
-    final var name: String? = null
-        private set
+    var name: String? = null
+        protected set
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", columnDefinition = "enum")
-    final var gender: GenderEnum? = null
-        private set
+    var gender: GenderEnum? = null
+        protected set
 
     @Column(name = "phone", length = 11)
-    final var phone: String? = null
-        private set
+    var phone: String? = null
+        protected set
 
     @Column(name = "birthday", length = 8)
-    final var birthday: String? = null
-        private set
+    var birthday: String? = null
+        protected set
 
     @Enumerated(EnumType.STRING)
     @Column(name = "join_type", columnDefinition = "enum")
-    final var joinType: JoinTypeEnum? = null
-        private set
+    var joinType: JoinTypeEnum? = null
+        protected set
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "login_date")
-    final var loginDate: Date? = null
+    var loginDate: Date? = null
+        protected set
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "auth_date")
-    final var authDate: Date? = null
-        private set
+    var authDate: Date? = null
+        protected set
 
     @Column(name = "total_order_count")
-    final var totalOrderCount: Int = 0
-        private set
+    var totalOrderCount: Int = 0
+        protected set
 
     @Column(name = "total_payment_count")
-    final var totalPaymentCount: Int = 0
-        private set
+    var totalPaymentCount: Int = 0
+        protected set
 
     @Column(name = "total_mileage_amount")
-    final var totalMileageAmount: BigDecimal = BigDecimal.ZERO
-        private set
+    var totalMileageAmount: BigDecimal = BigDecimal.ZERO
+        protected set
 
     @Column(name = "total_order_amount")
-    final var totalOrderAmount: BigDecimal = BigDecimal.ZERO
-        private set
+    var totalOrderAmount: BigDecimal = BigDecimal.ZERO
+        protected set
 
     @Column(name = "total_payment_amount")
-    final var totalPaymentAmount: BigDecimal = BigDecimal.ZERO
-        private set
+    var totalPaymentAmount: BigDecimal = BigDecimal.ZERO
+        protected set
 
     fun login() {
         this.loginDate = Date()
