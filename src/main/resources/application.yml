@@ -11,3 +11,11 @@ spring:
   profiles:
     active: local
 
+security:
+  oauth2:
+    client:
+      id: auth_id
+      client-secret: auth_secret
+    resource:
+      jwt:
+        key-value: fastview-dev-01-a12zs33zaedfeeaa

@@ -1,12 +1,9 @@
 package com.brandjunhoe.userservice.shipping.domain
 
 import com.brandjunhoe.userservice.common.domain.DateColumnEntity
-import com.brandjunhoe.userservice.common.domain.DateDeleteColumnEntity
-import com.brandjunhoe.userservice.mileage.domain.enums.MileageStateNum
-import com.brandjunhoe.userservice.mileage.domain.enums.MileageTypeNum
 import com.brandjunhoe.userservice.shipping.presiontation.dto.UserShippingAddressUpdateDTO
+import com.brandjunhoe.userservice.user.domain.User
 import org.hibernate.annotations.GenericGenerator
-import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
 
@@ -16,6 +13,8 @@ class UserShippingAddress(
 
     @Column(name = "usr_id", nullable = false)
     val usrId: UUID,
+    /*@OneToOne @JoinColumn(name = "usr_id")
+    val user: User,*/
 
     receiver: String,
 
@@ -47,8 +46,8 @@ class UserShippingAddress(
         protected set
 
 
-    @Column(name = "default")
-     var default: Boolean = false
+    @Column(name = "defaulto")
+     var default: Boolean = default
         protected set
 
 

@@ -1,7 +1,7 @@
 package com.brandjunhoe.userservice.shipping.application
 
-import com.brandjunhoe.userservice.common.exception.DataNotFoundException
 import com.brandjunhoe.userservice.shipping.application.dto.UserShippingAddressDTO
+import com.brandjunhoe.userservice.shipping.application.exception.UserShippingAddressNotFoundException
 import com.brandjunhoe.userservice.shipping.domain.UserShippingAddressRepository
 import com.brandjunhoe.userservice.shipping.presiontation.dto.UserShippingAddressSaveDTO
 import com.brandjunhoe.userservice.shipping.presiontation.dto.UserShippingAddressUpdateDTO
@@ -20,13 +20,7 @@ class UserShippingAddressService(
 
     fun findByAllByUsr(usrId: UUID): List<UserShippingAddressDTO> =
         userShippingAddressRepository.findByUsrId(usrId).map {
-            UserShippingAddressDTO(
-                it.id,
-                it.receiver,
-                it.phone,
-                it.address,
-                it.default
-            )
+            UserShippingAddressDTO(it)
         }
 
 
@@ -48,7 +42,7 @@ class UserShippingAddressService(
     @Transactional
     fun update(id: UUID, request: UserShippingAddressUpdateDTO) {
         val userShippingAddress = userShippingAddressRepository.findById(id)
-            ?: throw DataNotFoundException("userShipping data not found ")
+            ?: throw UserShippingAddressNotFoundException()
 
         userShippingAddress.update(request)
 

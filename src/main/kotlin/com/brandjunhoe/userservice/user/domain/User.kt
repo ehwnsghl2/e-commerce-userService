@@ -12,7 +12,6 @@ import com.brandjunhoe.userservice.user.domain.nums.GradeEnum
 import com.brandjunhoe.userservice.user.domain.nums.JoinTypeEnum
 import com.brandjunhoe.userservice.wish.domain.Wish
 import org.hibernate.annotations.ColumnDefault
-import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Where
 import java.math.BigDecimal

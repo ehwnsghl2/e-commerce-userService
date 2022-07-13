@@ -17,3 +17,8 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:9001/api/v1/user/6efb1bf8-d3d3-472a-876e-223a2798eb56
+Content-Type: application/json
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTUzNzMzNTEsInVzZXJfbmFtZSI6ImJyYW5kanVuaG9lM0BnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiNTkwN2MzYmYtNWRmZS00ZDRiLTk0YzUtNjg1MGIyMzgzZjMyIiwiY2xpZW50X2lkIjoiYXV0aF9pZCIsInNjb3BlIjpbInVzZXIiXX0.T9fzczWT72CntRoSqfAj2OM16iuDKU5Uz17tLrMzXP4"
+
+###
