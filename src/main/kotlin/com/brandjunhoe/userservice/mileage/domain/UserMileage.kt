@@ -33,8 +33,10 @@ class UserMileage(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID = UUID.randomUUID()
 
-
 ) : DateColumnEntity() {
+
+    @Version
+    var version: Long? = null
 
     @Enumerated(EnumType.STRING)
     @Column(name = "state", columnDefinition = "enum", nullable = false)

@@ -26,4 +26,10 @@ class UserController(private val userService: UserService) {
         return CommonResponse(userService.findById(id))
     }
 
+    @PatchMapping("/{id}")
+    fun updateUser(@PathVariable("id") @Valid @NotBlank id: UUID): CommonResponse<Unit> {
+        userService.update(id)
+        return CommonResponse()
+    }
+
 }

@@ -33,6 +33,9 @@ class UserShippingAddress(
 
 ) : DateColumnEntity() {
 
+    @Version
+    var version: Long? = null
+
     @Column(name = "receiver", length = 30, nullable = false)
     var receiver: String = receiver
         protected set

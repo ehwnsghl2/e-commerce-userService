@@ -68,6 +68,9 @@ dependencies {
 
     implementation("mysql:mysql-connector-java")
     implementation("com.querydsl:querydsl-jpa") // querydsl
+
+    // ehcache
+    implementation ("org.hibernate:hibernate-ehcache:5.4.27.Final")
     implementation("com.vladmihalcea:hibernate-types-52:2.12.1")
     kapt(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa") // querydsl
     annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")

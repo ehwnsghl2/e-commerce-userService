@@ -31,6 +31,9 @@ class Cart(
 
 ) : DateDeleteColumnEntity() {
 
+    @Version
+    var version: Long? = null
+
     @Column(name = "quantity", nullable = false)
     var quantity: Int = quantity
         protected set

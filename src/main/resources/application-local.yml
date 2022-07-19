@@ -5,3 +5,30 @@ spring:
       fail-fast: true
   config:
     import: optional:configserver:http://localhost:8888
+
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: true
+
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
+
+
+logging: # 로깅
+  level: # 로깅 레벨
+    root: info # 로킹 레벨 설정
+    org.springframework.jdbc.datasource.SimpleDriverDataSource: DEBUG # 정확한 로그를 찍기 위함
+    org.hibernate.SQL: DEBUG # 정확한 로그를 찍기 위함
+    org.hibernate.type.descriptor.sql: trace # Query 확인
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error # EC2가 아니라 로컬환경 시 에러발생 내부적으로 로그에 찍히지 않도도록 WARNING 으로 처리

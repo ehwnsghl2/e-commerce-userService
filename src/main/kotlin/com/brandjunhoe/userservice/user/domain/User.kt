@@ -12,15 +12,19 @@ import com.brandjunhoe.userservice.user.domain.nums.GradeEnum
 import com.brandjunhoe.userservice.user.domain.nums.JoinTypeEnum
 import com.brandjunhoe.userservice.wish.domain.Wish
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.DynamicUpdate
 import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Where
 import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
 
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "user")
 @Where(clause = "deldate IS NULL")
+@DynamicUpdate
 class User(
 
     @Column(name = "email", length = 255, nullable = false)
@@ -36,6 +40,9 @@ class User(
     val id: UUID = UUID.randomUUID()
 
 ) : DateDeleteColumnEntity() {
+
+    @Version
+    var version: Long? = null
 
     @Enumerated(EnumType.STRING)
     @Column(name = "grade", columnDefinition = "enum", nullable = false)
@@ -124,6 +131,9 @@ class User(
     ): UserShippingAddress =
         UserShippingAddress(this.id, receiver, phone, address, default)
 
+    fun changeBirthday(birthday: String) {
+        this.birthday = birthday
+    }
 
 }
 

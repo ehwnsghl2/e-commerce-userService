@@ -27,8 +27,8 @@ class ResourceServerConfig(val oauthEntryPoint: AuthenticationEntryPoint) : Reso
             /*.antMatchers(
                 "/api/v1/user/signin"
             ).permitAll()*/
-            .antMatchers("/**").access("#oauth2.hasScope('user')")
-            //.antMatchers("/**").permitAll()
+            //.antMatchers("/**").access("#oauth2.hasScope('user')")
+            .antMatchers("/**").permitAll()
             .anyRequest()
             .authenticated()
 

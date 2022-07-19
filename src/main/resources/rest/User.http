@@ -2,7 +2,7 @@ POST http://localhost:9001/api/v1/user/signup
 Content-Type: application/json
 
 {
-  "email" : "brandjunhoe3@gmail.com",
+  "email" : "brandjunhoe6@gmail.com",
   "password" : "1234"
 }
 
@@ -15,6 +15,11 @@ Content-Type: application/json
   "email" : "brandjunhoe3@gmail.com",
   "password" : "1234"
 }
+
+###
+PATCH http://localhost:5555/api/v1/user/4dec04e0-1092-4a5d-b5a5-fb487c4ddc68
+Content-Type: application/json
+
 
 ###
 GET http://localhost:9001/api/v1/user/6efb1bf8-d3d3-472a-876e-223a2798eb56

@@ -24,5 +24,10 @@ class Wish(
     @Column(columnDefinition = "BINARY(16)")
     val id: UUID? = null
 
-) : DateColumnEntity()
+) : DateColumnEntity() {
+
+    @Version
+    var version: Long? = null
+
+}
 
