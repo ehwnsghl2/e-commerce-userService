@@ -15,7 +15,6 @@ enum class ErrorCode(val status: Int, val code: Int?, val message: String) {
 
     USER_EMAIL_ALREADY_USE(HttpStatus.BAD_REQUEST.value(), 101,"user email was already use"),
     USER_PASSWORD_NOT_MACHING(HttpStatus.BAD_REQUEST.value(), 102,"user password not maching"),
-    WISH_ALREADY(HttpStatus.BAD_REQUEST.value(), 103,"wish was already"),
     USER_MILEAGE_ALREADY(HttpStatus.BAD_REQUEST.value(), 104,"mileage was already saved"),
 
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED.value(), 405,"해당 메서드는 해당되지 않습니다."),

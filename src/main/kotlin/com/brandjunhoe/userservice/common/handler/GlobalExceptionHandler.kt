@@ -1,12 +1,10 @@
 package com.brandjunhoe.userservice.common.handler
 
-import com.brandjunhoe.userservice.cart.application.exception.CartProductNotMatchingException
 import com.brandjunhoe.userservice.common.code.ErrorCode
 import com.brandjunhoe.userservice.common.code.ErrorException
 import com.brandjunhoe.userservice.common.exception.BadRequestException
 import com.brandjunhoe.userservice.common.exception.DataNotFoundException
 import com.brandjunhoe.userservice.common.response.CommonResponse
-import com.brandjunhoe.userservice.wish.application.exception.WishProductNotMatchingException
 import org.apache.http.auth.AuthenticationException
 import org.springframework.beans.BeanInstantiationException
 import org.springframework.core.Ordered
@@ -41,8 +39,6 @@ class GlobalExceptionHandler {
             javax.websocket.DecodeException::class,
             MethodArgumentTypeMismatchException::class,
             IOException::class,
-            CartProductNotMatchingException::class,
-            WishProductNotMatchingException::class,
             Exception::class
         ]
     )

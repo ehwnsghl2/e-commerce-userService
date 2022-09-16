@@ -1,6 +1,5 @@
 package com.brandjunhoe.userservice.user.domain
 
-import com.brandjunhoe.userservice.cart.domain.Cart
 import com.brandjunhoe.userservice.common.domain.DateDeleteColumnEntity
 import com.brandjunhoe.userservice.mileage.domain.UserMileage
 import com.brandjunhoe.userservice.mileage.domain.enums.MileageStateNum
@@ -10,7 +9,6 @@ import com.brandjunhoe.userservice.shipping.domain.UserShippingAddress
 import com.brandjunhoe.userservice.user.domain.nums.GenderEnum
 import com.brandjunhoe.userservice.user.domain.nums.GradeEnum
 import com.brandjunhoe.userservice.user.domain.nums.JoinTypeEnum
-import com.brandjunhoe.userservice.wish.domain.Wish
 import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicUpdate
 import org.hibernate.annotations.GenericGenerator
@@ -106,22 +104,12 @@ class User(
         this.loginDate = Date()
     }
 
-    fun createWish(
-        productCode: String
-    ): Wish = Wish(this.id, productCode)
-
     fun createMileageReady(
         orderProductCode: String,
         type: MileageTypeNum,
         state: MileageStateNum,
         amount: BigDecimal
     ): UserMileage = UserMileage(this.id, orderProductCode, type, state, amount)
-
-    fun createCart(
-        productCode: String,
-        itemCode: String,
-        quantity: Int
-    ): Cart = Cart(this.id, productCode, itemCode, quantity)
 
     fun createShippingAddress(
         receiver: String,

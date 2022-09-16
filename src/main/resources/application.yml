@@ -19,3 +19,6 @@ security:
     resource:
       jwt:
         key-value: fastview-dev-01-a12zs33zaedfeeaa
+feign:
+  circuitbreaker:
+    enabled: true

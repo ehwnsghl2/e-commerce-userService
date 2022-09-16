@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam
 /**
  * Create by DJH on 2022/04/06.
  */
-@FeignClient(name = "product-service")
+@FeignClient(name = "product-service"/*, fallback = ProductClientFallbackFactory::class*/)
 interface ProductClient {
 
     @GetMapping("/api/v1/product-internal")
     fun findProductByProductcodes(@RequestParam("productCodes") productCodes: List<String>): CommonResponse<List<ProductDTO>>
+
 
 }
